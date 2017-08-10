@@ -9,6 +9,7 @@ const vk = require("./vk");
 const url = 'http://frtmix.github.io';
 
 module.exports = function (isNight) {
+    Canvas.registerFont(path + '/static/Lato-Regular.ttf', {family: 'Lato'});
     let canvas = new Canvas(1590, 400);
     const ctx = canvas.getContext('2d');
     if (isNight) {
@@ -19,7 +20,8 @@ module.exports = function (isNight) {
 
     ctx.fillRect(0, 0, 1590, 400);
 
-    ctx.font = "40px sans";
+    ctx.font = "40px Lato Regular";
+
 
     if (isNight) {
         ctx.fillStyle = '#FFF';
@@ -41,12 +43,10 @@ module.exports = function (isNight) {
 
         $(projlist_wrap).each(function (index, entry) {
             if (index < 3) {
-                let caption = $(entry).find($('.caption')).text();
-                let pic_src = url + "/" + $(entry).find('a').find('img').attr('src');
-                let pic = new Canvas.Image;
-
+                const caption = $(entry).find($('.caption')).text();
+                const pic_src = url + "/" + $(entry).find('a').find('img').attr('src');
+                const pic = new Canvas.Image;
                 let svg = new Rsvg();
-
                 svg.on('finish', function () {
                     pic.src = svg.render({
                         format: 'png',
@@ -98,9 +98,8 @@ function write(canvas) {
             'crop_y2': '400',
             'group_id': '95612745'
         }).then((group) => {
-            let upload_url = group.upload_url;
-
-            let formData = {
+            const upload_url = group.upload_url;
+            const formData = {
                 photo: fs.createReadStream(path + '/static/cover.png'),
             };
 
@@ -108,7 +107,6 @@ function write(canvas) {
                 if (err) throw err;
                 const body_json = JSON.parse(body);
                 console.log(body_json);
-
                 const hash = body_json.hash;
                 const photo = body_json.photo;
                 vk.api.photos.saveOwnerCoverPhoto({'hash': hash, 'photo': photo}).then(() => {

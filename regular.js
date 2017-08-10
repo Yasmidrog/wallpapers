@@ -18,8 +18,8 @@ const cb = (sunset, sunrise, night) => {
 function updateDelay(sunset, sunrise, night) {
     updateWallpaper(night);
     (night) ?
-        isNight("tomorrow", (sunset, sunrise, night) => {
-            cb(sunset, sunrise, night)
+        isNight("tomorrow", (sun, sunr, n) => {
+            cb(sun, sunr, n)
         })  :
         cb(sunset, sunrise, night)
 }
