@@ -4,7 +4,7 @@ const request = require('request');
 const isNight = require('./isNight');
 const secret = require("./config").SECRET;
 const http = require('http');
-const port = process.env.PORT || 1337;
+const port = process.env.WALLPORT || 1339;
 const server = http.createServer(function (req, res) {
     let jsondata= "";
     req.on('data', function (chunk) {
