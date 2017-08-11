@@ -8,7 +8,7 @@ module.exports = function (when, callback) {
         const sunset = new Date(json.sunset);
         const now = new Date();
         callback(sunset, sunrise, (
-            now.getTime() <= sunrise.getTime()&&now.getTime() >= sunset.getTime()
+            now.getTime() <= sunrise.getTime()||now.getTime() >= sunset.getTime()
         ));
     });
 };

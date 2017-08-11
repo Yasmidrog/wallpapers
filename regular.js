@@ -7,19 +7,18 @@ module.exports = (() => {
     });
 })();
 
-const cb = (sunset, sunrise, night) => {
+const cb = (sunset, sunrise) => {
     const now = new Date();
-    night = true;
     const min = sunrise.getTime() - now.getTime();
     setTimeout(function () {
-        updateDelay(sunset, sunrise, night)
+        updateDelay(sunset, sunrise, true)
     }, min);
 };
 function updateDelay(sunset, sunrise, night) {
     updateWallpaper(night);
     (night) ?
-        isNight("tomorrow", (sun, sunr, n) => {
-            cb(sun, sunr, n)
+        isNight("tomorrow", (sun, sunr) => {
+            cb(sun, sunr)
         })  :
-        cb(sunset, sunrise, night)
+        cb(sunset, sunrise)
 }
